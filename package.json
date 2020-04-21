@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
     "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
     "seed:make": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
@@ -30,7 +31,9 @@
     "pg": "^8.0.2"
   },
   "devDependencies": {
+    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
+    "nodemon": "^2.0.3",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
   }
