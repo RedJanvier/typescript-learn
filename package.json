@@ -5,11 +5,11 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc -p .",
-    "start": "ts-node index.ts",
-    "knex:migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-    "knex:migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
-    "knex:seed:make": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
-    "knex:seed:run": "knex --knexfile src/database/knexfile.ts seed:run"
+    "start": "ts-node src/index.ts",
+    "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
+    "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
+    "seed:make": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
+    "seed:run": "knex --knexfile src/database/knexfile.ts seed:run"
   },
   "repository": {
     "type": "git",

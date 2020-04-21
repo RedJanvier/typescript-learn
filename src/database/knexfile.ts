@@ -1,8 +1,8 @@
 // Update with your config settings.
 require("ts-node/register");
-import { config } from "dotenv";
+const { config } = require("dotenv");
 
-config();
+config({ path: "../../.env" });
 
 module.exports = {
   development: {
