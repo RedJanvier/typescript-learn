@@ -1,4 +1,4 @@
-import knex from "knex";
+import "colors";
 import path from "path";
 import express from "express";
 import { config } from "dotenv";
