@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import emailUtils from "../utils/email";
 import validate from "../utils/validate";
 import queries from "../database/queries";
+import { verifyToken } from "../utils/auth";
 
 const { bills, users } = queries;
 export default {
@@ -43,6 +44,36 @@ export default {
         success: false,
         data: null,
         error: error.message,
+      });
+    }
+  },
+  verify: async (req: Request, res: Response): Promise<any> => {
+    const { token } = req.params;
+    try {
+      const data = verifyToken({
+        token,
+        secret: process.env.JWT_SECRET!,
+      });
+
+      if (data.deny) {
+        // Delete user with email data.email
+        const email = await users.delete(data.email);
+        return res.status(200).json({
+          success: true,
+          data: `Registration Canceled successfully for ${email}!`,
+        });
+      }
+      const verified = await users.verify(data.email);
+
+      if (!verified) throw new Error("User not verified!");
+      return res.status(200).json({
+        success: true,
+        data: `${data.email} was successfully verified and can now login`,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        data: `Email failed to verify!`,
       });
     }
   },

@@ -1,9 +1,7 @@
-import path from "path";
-import jwt from "jsonwebtoken";
-import { config } from "dotenv";
 import nodemailer from "nodemailer";
 
-config({ path: path.resolve(__dirname, "../../.env") });
+import { signToken } from "./auth";
+
 interface MailConfig {
   mailserver: object;
   mail: object;
@@ -13,15 +11,6 @@ const sendMail = async (config: MailConfig): Promise<any> => {
   const info = await transporter.sendMail(config.mail);
   return console.log(`Preview: ${nodemailer.getTestMessageUrl(info)}`);
 };
-const signToken = ({
-  data,
-  secret,
-  duration,
-}: {
-  data: object;
-  secret: string;
-  duration: string | number;
-}): string => jwt.sign(data, secret, { expiresIn: duration });
 export default {
   sendVerificationMail: async (email: string) => {
     const tokenConfig = {

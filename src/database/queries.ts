@@ -18,5 +18,9 @@ export default {
     getAll: async () => await db.select(all).from("users"),
     create: async (inputUser: User) =>
       await db("users").insert(inputUser).returning(all),
+    verify: async (email: string) =>
+      await db("users").where("email", email).update({ verified: true }),
+    delete: async (email: string) =>
+      await db("users").where("email", email).del().returning("email"),
   },
 };
