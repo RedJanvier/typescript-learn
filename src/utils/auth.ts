@@ -19,7 +19,7 @@ export const verifyToken = ({
 }) => {
   try {
     const data = jwt.verify(token, secret);
-    return data;
+    return { ...(<any>data) };
   } catch (error) {
     console.log(`❌ Error in token verification: ${error.message}`.red.bold);
     return null;

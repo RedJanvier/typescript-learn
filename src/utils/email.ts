@@ -1,10 +1,7 @@
-import path from "path";
-import { config } from "dotenv";
 import nodemailer from "nodemailer";
 
 import { signToken } from "./auth";
 
-config({ path: path.resolve(__dirname, "../../.env") });
 interface MailConfig {
   mailserver: object;
   mail: object;
