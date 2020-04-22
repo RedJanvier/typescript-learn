@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import emailUtils from "../utils/email";
 import validate from "../utils/validate";
 import queries from "../database/queries";
-import { verifyToken } from "../utils/auth";
+import { verifyToken, signToken } from "../utils/auth";
 
 const { bills, users } = queries;
 export default {
@@ -74,6 +74,37 @@ export default {
       return res.status(500).json({
         success: false,
         data: `Email failed to verify!`,
+      });
+    }
+  },
+  login: async (req: Request, res: Response): Promise<any> => {
+    try {
+      const { email, password } = req.body;
+      if (!validate.email(email)) throw new Error("Email is not valid!");
+      if (password.length < 1 || email.length < 1)
+        throw new Error("Email & Password must be provided!");
+
+      const user = await users.getSingle({ email, verified: true });
+      // compare password with saved one
+      const loginData = {
+        name: (<any>user).name,
+        id: (<any>user).id,
+      };
+      const loginToken = signToken({
+        data: loginData,
+        duration: "3h",
+        secret: process.env.JWT_SECRET!,
+      });
+      return res.status(200).json({
+        success: true,
+        data: { token: loginToken, message: "The token is valid for 3h" },
+      });
+    } catch (error) {
+      console.log(`❌ Error in login: ${error.message}`.red.bold);
+      return res.status(500).json({
+        success: false,
+        data: null,
+        error: error.message,
       });
     }
   },
