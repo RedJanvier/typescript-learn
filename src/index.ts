@@ -10,8 +10,8 @@ config({ path: path.resolve(__dirname, "../.env") });
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(routes);
+app.use("/api/v1", routes);
 
 app.listen(PORT, () =>
-  console.log(`Server started at http://localhost:${PORT}/`)
+  console.log(`Server started at http://localhost:${PORT}/api/v1`)
 );
