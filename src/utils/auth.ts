@@ -30,7 +30,10 @@ export const verifyToken = ({
 export const encryptPassword = async (password: string): Promise<any> =>
   await bcrypt.hash(password, 12);
 
-export const decryptPassword = async (
-  password: string,
-  hash: string
-): Promise<any> => await bcrypt.compare(password, hash);
+export const decryptPassword = async ({
+  password,
+  hashed,
+}: {
+  password: string;
+  hashed: string;
+}): Promise<any> => await bcrypt.compare(password, hashed);
