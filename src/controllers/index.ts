@@ -20,7 +20,7 @@ export default {
   createUser: async (req: Request, res: Response): Promise<any> => {
     try {
       const createdUser = await users.create(req.body);
-
+      console.log("User".blue.bold, createdUser);
       if (!createdUser[0]) throw new Error("User not created");
 
       return res.status(201).json({ success: true, data: createdUser[0] });
