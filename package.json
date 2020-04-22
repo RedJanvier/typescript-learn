@@ -7,10 +7,12 @@
     "build": "tsc -p .",
     "start": "ts-node src/index.ts",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-    "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
+    "seed:run": "knex --knexfile src/database/knexfile.ts seed:run",
     "seed:make": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
-    "seed:run": "knex --knexfile src/database/knexfile.ts seed:run"
+    "reset:db": "npm run db:new && npm run migrate:latest && npm run seed:run",
+    "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
+    "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
+    "db:new": "dropdb --if-exists -U postgres ts-bills && createdb -U postgres ts-bills"
   },
   "repository": {
     "type": "git",
