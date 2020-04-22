@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import emailUtils from "../utils/email";
 import validate from "../utils/validate";
 import queries from "../database/queries";
-import { verifyToken } from "../utils/auth";
+import { verifyToken, encryptPassword, decryptPassword } from "../utils/auth";
 
 const { bills, users } = queries;
 export default {
@@ -22,12 +22,15 @@ export default {
   },
   createUser: async (req: Request, res: Response): Promise<any> => {
     try {
-      const { email, nid, phone } = req.body;
+      const { email, nid, phone, password } = req.body;
       if (!validate.email(email)) throw new Error("Email is invalid");
       if (!validate.phone(phone)) throw new Error("Phone must be Rwandan");
       if (!validate.nid(nid)) throw new Error("NID must be Rwanda");
 
-      const createdUser = await users.create(req.body);
+      const createdUser = await users.create({
+        ...req.body,
+        password: await encryptPassword(password),
+      });
 
       if (!createdUser[0]) throw new Error("User not created");
       console.log(`New user: ${createdUser[0].email} just signed up`.blue.bold);
