@@ -26,8 +26,6 @@
   },
   "homepage": "https://github.com/RedJanvier/typescript-learn#readme",
   "dependencies": {
-    "@types/express": "^4.17.6",
-    "@types/node": "^13.11.1",
     "bcrypt": "^4.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -36,7 +34,10 @@
     "pg": "^8.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.6",
     "@types/jsonwebtoken": "^8.3.9",
+    "@types/node": "^13.13.2",
     "@types/nodemailer": "^6.4.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",

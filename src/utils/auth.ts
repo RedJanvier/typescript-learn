@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const signToken = ({
@@ -25,3 +26,14 @@ export const verifyToken = ({
     return null;
   }
 };
+
+export const encryptPassword = async (password: string): Promise<any> =>
+  await bcrypt.hash(password, 12);
+
+export const decryptPassword = async ({
+  password,
+  hashed,
+}: {
+  password: string;
+  hashed: string;
+}): Promise<any> => await bcrypt.compare(password, hashed);
