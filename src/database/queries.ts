@@ -16,6 +16,7 @@ export default {
   },
   users: {
     getAll: async () => await db.select(all).from("users"),
-    create: async (inputUser: User) => await db("users").insert(inputUser),
+    create: async (inputUser: User) =>
+      await db("users").insert(inputUser).returning(all),
   },
 };
