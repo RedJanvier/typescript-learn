@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 
+import emailUtils from "../utils/email";
 import validate from "../utils/validate";
 import queries from "../database/queries";
 
@@ -29,7 +30,13 @@ export default {
 
       if (!createdUser[0]) throw new Error("User not created");
       console.log(`New user: ${createdUser[0].email} just signed up`.blue.bold);
-      return res.status(201).json({ success: true, data: createdUser[0] });
+      emailUtils.sendVerificationMail(createdUser[0].email);
+      return res.status(201).json({
+        success: true,
+        data: {
+          message: `Check your email(${createdUser[0].email}) for account verification`,
+        },
+      });
     } catch (error) {
       console.log(`❌ Error in signup: ${error.message}`.red.bold);
       return res.status(500).json({
