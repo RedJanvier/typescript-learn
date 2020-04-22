@@ -10,6 +10,7 @@ config({ path: path.resolve(__dirname, "../.env") });
 const app = express();
 const PORT = process.env.PORT;
 
+app.use(express.json());
 app.use("/api/v1", routes);
 
 app.listen(PORT, () =>

@@ -17,4 +17,16 @@ export default {
       res.status(500).json({ success: false, data: null, error: error });
     }
   },
+  createUser: async (req: Request, res: Response): Promise<any> => {
+    try {
+      const createdUser = await users.create(req.body);
+
+      if (!createdUser[0]) throw new Error("User not created");
+
+      return res.status(201).json({ success: true, data: createdUser[0] });
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`.red.bold);
+      return res.status(500).json({ success: false, data: null, error: error });
+    }
+  },
 };
