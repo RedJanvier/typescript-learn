@@ -100,7 +100,6 @@ export default {
         password,
         hashed: (<any>user).password,
       });
-      console.log(isValid);
       if (!isValid) throw new Error("Email or Passowrd is not valid!");
       const loginData = {
         name: (<any>user).name,
