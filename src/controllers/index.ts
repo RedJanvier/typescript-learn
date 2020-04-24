@@ -12,7 +12,9 @@ import {
 
 const { bills, users } = queries;
 export default {
-  getBills: async (req: Request, res: Response): Promise<any> => {
+  test: (req: Request, res: Response): Response<any> =>
+    res.status(200).json({ success: true, data: "Hello World" }),
+  listBills: async (req: Request, res: Response): Promise<any> => {
     const fetchedBills = await bills.getAll();
     return res.status(200).json({ success: true, data: fetchedBills });
   },
