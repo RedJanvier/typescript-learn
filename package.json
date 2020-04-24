@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "ts-node src/index.ts",
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon src/index.ts",
     "seed:run": "knex --knexfile src/database/knexfile.ts seed:run",
     "seed:make": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
     "reset:db": "npm run db:new && npm run migrate:latest && npm run seed:run",

@@ -5,7 +5,8 @@ import controllers from "../controllers";
 
 const router = Router();
 
-router.route("/").get(controllers.getBills);
+router.route("/").get(controllers.test);
+router.route("/bills").get(controllers.listBills);
 router.use("/users", userRoutes);
 
 export default router;
