@@ -10,9 +10,17 @@ interface User {
   salary: number;
   password: string;
 }
+interface Bill {
+  owner_id: number;
+  amount: number;
+  details?: string;
+  title: string;
+}
 export default {
   bills: {
     getAll: async () => await db.select(all).from("bills"),
+    create: async (inputBill: Bill) =>
+      await db("bills").insert(inputBill).returning(all),
   },
   users: {
     getAll: async () => await db.select(all).from("users"),

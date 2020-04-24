@@ -14,7 +14,8 @@ export async function seed(knex: Knex): Promise<any> {
           name: "Jane Doe",
           email: "jadoe@gmail.com",
           phone: "250739927472",
-          password: "250739927472",
+          password:
+            "$2b$12$2JiR2JiGFHodLlbf1ehV7OZYfqNZZG3ppMJPmerXXngqrBGNJrHQS",
         },
         {
           nid: "238472850287562955028",
@@ -23,7 +24,8 @@ export async function seed(knex: Knex): Promise<any> {
           name: "John Doe",
           email: "jdoe@gmail.com",
           phone: "250783927472",
-          password: "250783927472",
+          password:
+            "$2b$12$2JiR2JiGFHodLlbf1ehV7OZYfqNZZG3ppMJPmerXXngqrBGNJrHQS",
         },
         {
           nid: "338472850287572055028",
@@ -32,7 +34,8 @@ export async function seed(knex: Knex): Promise<any> {
           name: "Anitta Doe",
           email: "anndoe@gmail.com",
           phone: "250789927480",
-          password: "250789927480",
+          password:
+            "$2b$12$2JiR2JiGFHodLlbf1ehV7OZYfqNZZG3ppMJPmerXXngqrBGNJrHQS",
         },
       ]);
     });
