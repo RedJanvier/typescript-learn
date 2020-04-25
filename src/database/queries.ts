@@ -21,6 +21,8 @@ export default {
     getAll: async () => await db.select(all).from("bills"),
     create: async (inputBill: Bill) =>
       await db("bills").insert(inputBill).returning(all),
+    getSingle: async (conditions: object) =>
+      await db("bills").select(all).where(conditions),
   },
   users: {
     getAll: async () => await db.select(all).from("users"),
