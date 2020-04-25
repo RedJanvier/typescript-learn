@@ -27,6 +27,15 @@ export default {
       res.status(500).json({ success: false, data: null, error: error });
     }
   },
+  listBill: async (req: Request, res: Response): Promise<any> => {
+    try {
+      const [bill] = await bills.getSingle({ id: req.params.id });
+      return res.status(200).json({ success: true, data: bill });
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`.red.bold);
+      return res.status(500).json({ success: false, data: null, error: error });
+    }
+  },
   listUsers: async (req: Request, res: Response): Promise<any> => {
     try {
       const fetchedUsers = await users.getAll();
